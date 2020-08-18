@@ -19,42 +19,42 @@ function showData(data) {
     data10.map(song => {
 
         showSearch(song);
-      
+
     });
 
     let lyricButton = document.querySelectorAll(".get-lyrics");
     let results = document.querySelectorAll(".single-result");
-   
-    for(let i = 0; i < data10.length; i++){
+
+    for (let i = 0; i < data10.length; i++) {
         let button = lyricButton[i];
-        button.addEventListener('click',function(){
+        button.addEventListener('click', function () {
             let artist = data10[i].artist.name;
             let title = data10[i].title;
             //  song.artist + '/' + song.title
-            let songUrl =  'https://api.lyrics.ovh/v1/' + artist + '/' + title;
+            let songUrl = 'https://api.lyrics.ovh/v1/' + artist + '/' + title;
             fetch(songUrl)
-            .then(response=>response.json())
-            .then(data =>{
-             
-                lyric = data['lyrics'];
-                if(lyric !== undefined){
-                    let lyricsHTML= document.createElement('p');
-                    lyricsHTML.innerText = lyric;
-                    lyricsHTML.className = "lyric text-white"
-                    results[i].appendChild(lyricsHTML);
-                }else{
-                    let lyricsHTML= document.createElement('p');
-                    lyricsHTML.innerText = "Lyrics Not Found";
-                    lyricsHTML.style = "color:red";
-                    results[i].appendChild(lyricsHTML);
-                }
-             
-              
-            })
+                .then(response => response.json())
+                .then(data => {
+
+                    lyric = data['lyrics'];
+                    if (lyric !== undefined) {
+                        let lyricsHTML = document.createElement('p');
+                        lyricsHTML.innerText = lyric;
+                        lyricsHTML.className = "lyric text-white"
+                        results[i].appendChild(lyricsHTML);
+                    } else {
+                        let lyricsHTML = document.createElement('p');
+                        lyricsHTML.innerText = "Lyrics Not Found";
+                        lyricsHTML.style = "color:red";
+                        results[i].appendChild(lyricsHTML);
+                    }
+
+
+                })
         })
 
     }
-           
+
 
 }
 
@@ -72,8 +72,5 @@ function showSearch(song) {
                     </div>
                 </div>`
     searchResult.insertAdjacentHTML('beforeend', result);
-
-  
-
 }
 
